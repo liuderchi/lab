@@ -7,10 +7,12 @@ const books = [
   {
     title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
+    price: 100.1,
   },
   {
     title: 'Jurassic Park',
     author: 'Michael Crichton',
+    price: 150,
   },
 ];
 
@@ -23,6 +25,7 @@ const typeDefs = gql`
   type Book {
     title: String
     author: String
+    price: Float
   }
 
   # The "Query" type is the root of all GraphQL queries.
