@@ -14,6 +14,9 @@ const books = [
     author: 'Michael Crichton',
     price: 150,
   },
+  {
+    author: 'Derek',
+  },
 ];
 
 // Type definitions define the "shape" of your data and specify
@@ -28,10 +31,15 @@ const typeDefs = gql`
     price: Float
   }
 
+  type Car {
+    name: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     books: [Book]
+    cars: [Car]
   }
 `;
 
@@ -43,10 +51,16 @@ const resolvers = {
   },
 };
 
+// NOTE last value provided when some field is missing in fetched data
+const mocks = {
+  Float: () => 94.87,
+  String: () => 'MOCK String',
+};
+
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers, mocks });
 
 // This `listen` method launches a web-server.  Existing apps
 // can utilize middleware options, which we'll discuss later.
