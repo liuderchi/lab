@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "start:watch": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +14,8 @@
   "dependencies": {
     "apollo-server": "^2.0.0",
     "graphql": "^0.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }
