@@ -22,9 +22,17 @@ const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
   # This "Book" type can be used in other type declarations.
+  """
+  Description for the Book
+  A book has as a title, author and a price.
+  [Reference](https://www.apollographql.com/docs/apollo-server/essentials/schema.html#comments)
+  """
   type Book {
+    "title is a string."
     title: String
+    "author is a string temporarily."
     author: String
+    "price is a float number."
     price: Float
   }
 
