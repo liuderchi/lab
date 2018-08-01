@@ -4,6 +4,7 @@
   "description": "",
   "main": "db.js",
   "scripts": {
+    "start": "json-graphql-server db.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
