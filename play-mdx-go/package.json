@@ -1,0 +1,19 @@
+{
+  "name": "play-mdx-go",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "styled-components": "^3.4.5",
+    "superbox": "^2.1.0"
+  }
+}
