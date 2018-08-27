@@ -1,0 +1,5 @@
+My name is ${USER}
+
+My home path is ${HOME}
+
+My nvm is installed at $NVM_DIR
