@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "codemirror": "^5.40.0",
-    "cost-of-modules": "^1.0.1"
+    "cost-of-modules": "^1.0.1",
+    "react-ace": "^6.1.4"
   }
 }
