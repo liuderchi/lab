@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cost-of-modules": "cost-of-modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
