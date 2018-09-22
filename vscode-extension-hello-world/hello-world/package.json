@@ -21,6 +21,10 @@
                 "title": "Hello World: Activate"
             },
             {
+                "command": "extension.wordCount",
+                "title": "Hello World: Word Count"
+            },
+            {
                 "command": "extension.greet",
                 "title": "Hello World: Greet"
             }

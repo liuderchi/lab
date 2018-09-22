@@ -26,7 +26,21 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('WoW Hello World!');
     });
 
+    let disposable2 = vscode.commands.registerCommand('extension.wordCount', () => {
+        let editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return; // No open text editor
+        }
+        let selection = editor.selection;
+        let text = editor.document.getText(selection);
+
+        // Display a message box to the user
+        // vscode.window.showInformationMessage('Selected characters: ' + text.length);
+        vscode.window.showInformationMessage(`Selected Chars: ${text.length}`);
+    });
+
     context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable2);
 }
 
 // this method is called when your extension is deactivated
