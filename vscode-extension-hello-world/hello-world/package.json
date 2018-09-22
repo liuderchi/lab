@@ -11,6 +11,7 @@
         "Other"
     ],
     "activationEvents": [
+        "onCommand:extension.markdownInitTemplate",
         "onCommand:extension.sayHello"
     ],
     "main": "./out/extension",
@@ -23,6 +24,10 @@
             {
                 "command": "extension.wordCount",
                 "title": "Hello World: Word Count"
+            },
+            {
+                "command": "extension.markdownInitTemplate",
+                "title": "Markdown: Insert Init Template"
             },
             {
                 "command": "extension.greet",
