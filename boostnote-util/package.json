@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "util:validate": "npx mocha src/validation.js",
+    "util:sanitize": "src/sanitize.js"
   },
   "keywords": [],
   "author": "",
