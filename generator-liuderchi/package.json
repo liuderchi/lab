@@ -1,7 +1,7 @@
 {
   "name": "generator-liuderchi",
   "version": "0.0.0",
-  "description": "",
+  "description": "generate boilerplate for liuderchi",
   "homepage": "",
   "author": {
     "name": "liuderchi",
@@ -66,7 +66,7 @@
         "error",
         {
           "singleQuote": true,
-          "printWidth": 90
+          "trailingComma": "es5"
         }
       ]
     },

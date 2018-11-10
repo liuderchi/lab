@@ -7,7 +7,9 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the supreme ${chalk.red('generator-liuderchi')} generator!`)
+      yosay(
+        `Welcome to the supreme ${chalk.red('generator-liuderchi')} generator!`
+      )
     );
 
     const prompts = [
@@ -15,8 +17,8 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'someAnswer',
         message: 'Would you like to enable this option?',
-        default: true
-      }
+        default: true,
+      },
     ];
 
     return this.prompt(prompts).then(props => {
