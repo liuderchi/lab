@@ -19,6 +19,12 @@ module.exports = class extends Generator {
         message: 'Would you like to enable this option?',
         default: true,
       },
+      {
+        type: 'input',
+        name: 'fileName',
+        message: 'Example File Name?',
+        default: 'foobar',
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -28,6 +34,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const { fileName } = this.props;
     this.fs.copy(
       this.templatePath('dummyfile.txt'),
       this.destinationPath('dummyfile.txt')
@@ -35,6 +42,14 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('package.json'),
       this.destinationPath('package.json')
+    );
+    // https://github.com/sboudrias/mem-fs-editor#copytplfrom-to-context-templateoptions--copyoptions
+    this.fs.copyTpl(
+      this.templatePath('dummyfileWithTpl.txt'),
+      this.destinationPath(`${fileName}.txt`),
+      {
+        fileName,
+      }
     );
   }
 
