@@ -1,46 +1,10 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+const promptToProps = require('./src/promptToProps');
 
 module.exports = class extends Generator {
   async prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the supreme ${chalk.red('generator-liuderchi')} generator!`
-      )
-    );
-
-    // Parse cli arg options
-    const {
-      options,
-      args: [name],
-    } = this;
-    const type = options.type || options.t;
-    console.warn({ name, type });
-
-    const prompts = [
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Package Name?',
-        default: name || 'my-package',
-      },
-      {
-        type: 'list',
-        name: 'type',
-        message: 'Package Type?',
-        choices: [
-          'cli',
-          'lib',
-          // 'web'
-        ],
-        default: type || 'cli',
-      },
-    ];
-
-    this.props = await this.prompt(prompts);
+    this.props = await promptToProps.bind(this).call();
   }
 
   writing() {
