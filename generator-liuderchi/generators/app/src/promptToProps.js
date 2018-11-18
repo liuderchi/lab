@@ -3,39 +3,34 @@ const yosay = require('yosay');
 
 const promptToProps /* () => Promise */ = async function() {
   // NOTE require binding this for consumer
-
-  // Have Yeoman greet the user.
   this.log(
-    yosay(
-      `Welcome to the supreme ${chalk.red('generator-liuderchi')} generator!`
-    )
+    yosay(`Welcome to the ${chalk.red('generator-leetcode')} generator!`)
   );
 
   // Parse cli arg options
-  const {
-    options,
-    args: [name],
-  } = this;
-  const type = options.type || options.t;
-  console.warn({ name, type });
+  const { options, args } = this;
+  const num = options.num || options.n;
+  const name = options.name || args[0];
 
   const prompts = [
     {
+      message: 'Problem number?',
       type: 'input',
-      name: 'name',
-      message: 'Package Name?',
-      default: name || 'my-package',
+      name: 'num',
+      default: num || '000',
     },
     {
-      type: 'list',
-      name: 'type',
-      message: 'Package Type?',
-      choices: [
-        'cli',
-        'lib',
-        // 'web'
-      ],
-      default: type || 'cli',
+      message: 'Problem name?',
+      type: 'input',
+      name: 'name',
+      default: name || 'WIP',
+    },
+    {
+      type: 'confirm',
+      name: 'install',
+      message:
+        'Would you like to install npm dependency after scaffold is created?',
+      default: false,
     },
   ];
 
