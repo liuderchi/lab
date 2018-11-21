@@ -1,15 +1,18 @@
 'use strict';
 const Generator = require('yeoman-generator');
-// Const promptToProps = require('./src/promptToProps');
+const slugify = require('slugify');
+const promptToProps = require('./src/promptToProps');
+const { pad } = require('./src/utils');
 
 module.exports = class extends Generator {
   async prompting() {
-    // This.props = await promptToProps.bind(this).call();
+    this.props = await promptToProps.bind(this).call();
   }
 
   writing() {
-    // Const { name } = this.props;
-    const projRoot = '123_TODO_FOO';
+    const { name, num } = this.props;
+    const projRoot = slugify(`${pad(num, 3)} ${name}`, '-');
+
     this.fs.copy(
       this.templatePath('.gitignore'),
       this.destinationPath(`${projRoot}/.gitignore`)
