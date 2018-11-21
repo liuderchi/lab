@@ -25,6 +25,13 @@ const promptToProps /* () => Promise */ = async function() {
       name: 'name',
       default: name || 'WIP',
     },
+    {
+      type: 'confirm',
+      name: 'install',
+      message:
+        'Would you like to install npm dependency after scaffold is created?',
+      default: false,
+    },
   ];
 
   return this.prompt(prompts);

@@ -71,12 +71,17 @@ module.exports = class extends Generator {
     );
   }
 
-  // Install() {
-  //   this.installDependencies({
-  //     // http://yeoman.io/generator/Generator.html#installDependencies
-  //     bower: false,
-  //     npm: false,
-  //     yarn: true,
-  //   });
-  // }
+  Install() {
+    if (this.props.install) {
+      const { name, num } = this.props;
+      const projRoot = slugify(`${pad(num, 3)} ${name}`, '-');
+      process.chdir(path.join(process.cwd(), projRoot));
+      this.installDependencies({
+        // http://yeoman.io/generator/Generator.html#installDependencies
+        bower: false,
+        npm: false,
+        yarn: true,
+      });
+    }
+  }
 };
