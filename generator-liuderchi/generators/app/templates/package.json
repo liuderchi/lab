@@ -1,5 +1,5 @@
 {
-  "name": "039-combination-sum",
+  "name": "<%- `${num}-${nameSlug}` %>",
   "version": "1.0.0",
   "description": "",
   "main": "problem/index.js",

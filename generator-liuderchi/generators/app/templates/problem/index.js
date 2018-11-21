@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 
 const App = () => (
   <div>
-    <h3>039 Combination Sum</h3>
+    <h3><%- `${num} ${name}` %></h3>
     <ol>
       <li>
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://leetcode.com/problems/combination-sum/description/"
+          href="https://leetcode.com/problems/<%- nameSlug %>/description/"
         >
           Problem Description
         </a>

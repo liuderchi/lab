@@ -4,4 +4,19 @@ const pad = (num, size) => {
   return s;
 };
 
-module.exports = { pad };
+const capitalizeAllWords = str =>
+  str
+    .split(' ')
+    .map(w => `${w[0].toUpperCase()}${w.slice(1)}`)
+    .join(' ');
+
+const camalCase = str =>
+  str
+    .split(' ')
+    .map(
+      (w, i) =>
+        `${i === 0 ? w[0].toLowerCase() : w[0].toUpperCase()}${w.slice(1)}`
+    )
+    .join('');
+
+module.exports = { pad, capitalizeAllWords, camalCase };

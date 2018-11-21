@@ -1,9 +1,9 @@
-const { default: combinationSum } = require('./solution');
+const { default: <%- funcName %> } = require('./solution');
 
-test('type of combinationSum is function', () => {
-  expect(typeof combinationSum).toBe('function');
+test('type of <%- funcName %> is function', () => {
+  expect(typeof <%- funcName %>).toBe('function');
 });
 
-test('basic examples for combinationSum()', () => {
-  expect(combinationSum([2, 3, 5, 7], 7)).toEqual([[2, 2, 3], [2, 5], [7]]);
+test('basic examples for <%- funcName %>()', () => {
+  expect(<%- funcName %>(2)).toEqual(30);
 });
