@@ -8,14 +8,14 @@ const { pad, capitalizeAllWords, camalCase } = require('./src/utils');
 module.exports = class extends Generator {
   async prompting() {
     this.props = await promptToProps.bind(this).call();
-    if (this.props.name) {
-      this.props.name = slugify(this.props.name, ' ');
+    if (this.props.title) {
+      this.props.title = slugify(this.props.title, ' ');
     }
   }
 
   writing() {
-    const { name, num } = this.props;
-    const projRoot = slugify(`${pad(num, 3)} ${name}`, '-');
+    const { title, num } = this.props;
+    const projRoot = slugify(`${pad(num, 3)} ${title}`, '-');
 
     const resources = [
       '.gitignore',
@@ -30,10 +30,10 @@ module.exports = class extends Generator {
         this.templatePath(p),
         this.destinationPath(path.join(projRoot, p)),
         {
-          name: capitalizeAllWords(name),
-          nameSlug: slugify(name, '-'),
+          title: capitalizeAllWords(title),
+          titleSlug: slugify(title, '-'),
           num: pad(num, 3),
-          funcName: camalCase(name),
+          funcName: camalCase(title),
         }
       );
     });
@@ -41,8 +41,8 @@ module.exports = class extends Generator {
 
   Install() {
     if (this.props.install) {
-      const { name, num } = this.props;
-      const projRoot = slugify(`${pad(num, 3)} ${name}`, '-');
+      const { title, num } = this.props;
+      const projRoot = slugify(`${pad(num, 3)} ${title}`, '-');
       process.chdir(path.join(process.cwd(), projRoot));
       this.installDependencies({
         // http://yeoman.io/generator/Generator.html#installDependencies

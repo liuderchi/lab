@@ -1,5 +1,5 @@
 {
-  "name": "<%- `${num}-${nameSlug}` %>",
+  "name": "<%- `${num}-${titleSlug}` %>",
   "version": "1.0.0",
   "description": "",
   "main": "problem/index.js",

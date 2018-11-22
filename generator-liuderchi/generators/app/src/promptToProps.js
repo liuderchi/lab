@@ -10,7 +10,7 @@ const promptToProps /* () => Promise */ = async function() {
   // Parse cli arg options
   const { options, args } = this;
   const num = options.num || options.n;
-  const name = options.name || args[0];
+  const title = options.title || options.t || args[0];
 
   const prompts = [
     {
@@ -20,10 +20,10 @@ const promptToProps /* () => Promise */ = async function() {
       default: num || '000',
     },
     {
-      message: 'Problem name?',
+      message: 'Problem title?',
       type: 'input',
-      name: 'name',
-      default: name || 'untitled problem',
+      name: 'title',
+      default: title || 'untitled problem',
     },
     {
       type: 'confirm',

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 
 const App = () => (
   <div>
-    <h3><%- `${num} ${name}` %></h3>
+    <h3><%- `${num} ${title}` %></h3>
     <ol>
       <li>
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://leetcode.com/problems/<%- nameSlug %>/description/"
+          href="https://leetcode.com/problems/<%- titleSlug %>/description/"
         >
           Problem Description
         </a>
