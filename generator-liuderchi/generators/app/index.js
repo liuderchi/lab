@@ -17,58 +17,26 @@ module.exports = class extends Generator {
     const { name, num } = this.props;
     const projRoot = slugify(`${pad(num, 3)} ${name}`, '-');
 
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath(path.join(projRoot, '.gitignore'))
-    );
-
-    this.fs.copyTpl(
-      this.templatePath(path.join('problem', 'index.js')),
-      this.destinationPath(path.join(projRoot, 'problem', 'index.js')),
-      {
-        name: capitalizeAllWords(name),
-        nameSlug: slugify(name, '-'),
-        num: pad(num, 3),
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath(path.join(projRoot, 'package.json')),
-      {
-        nameSlug: slugify(name, '-'),
-        num: pad(num, 3),
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('readme.md'),
-      this.destinationPath(path.join(projRoot, 'readme.md')),
-      {
-        name: capitalizeAllWords(name),
-        nameSlug: slugify(name, '-'),
-        num: pad(num, 3),
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('solution.js'),
-      this.destinationPath(path.join(projRoot, 'solution.js')),
-      {
-        name: capitalizeAllWords(name),
-        nameSlug: slugify(name, '-'),
-        num: pad(num, 3),
-        funcName: camalCase(name),
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('solution.test.js'),
-      this.destinationPath(path.join(projRoot, 'solution.test.js')),
-      {
-        funcName: camalCase(name),
-      }
-    );
+    const resources = [
+      '.gitignore',
+      path.join('problem', 'index.js'),
+      'package.json',
+      'readme.md',
+      'solution.js',
+      'solution.test.js',
+    ];
+    resources.forEach(p => {
+      this.fs.copyTpl(
+        this.templatePath(p),
+        this.destinationPath(path.join(projRoot, p)),
+        {
+          name: capitalizeAllWords(name),
+          nameSlug: slugify(name, '-'),
+          num: pad(num, 3),
+          funcName: camalCase(name),
+        }
+      );
+    });
   }
 
   Install() {

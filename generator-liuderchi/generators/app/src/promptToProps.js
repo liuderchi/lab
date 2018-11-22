@@ -23,7 +23,7 @@ const promptToProps /* () => Promise */ = async function() {
       message: 'Problem name?',
       type: 'input',
       name: 'name',
-      default: name || 'WIP',
+      default: name || 'untitled problem',
     },
     {
       type: 'confirm',
