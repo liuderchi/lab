@@ -1,5 +1,5 @@
 # generator-liuderchi [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> 
+>
 
 ## Installation
 
@@ -14,6 +14,12 @@ Then generate your new project:
 
 ```bash
 yo liuderchi
+```
+
+Or use sub-generator directly:
+
+```bash
+yo liuderchi:leetcode -n 39 'combination sum'
 ```
 
 ## Getting To Know Yeoman
