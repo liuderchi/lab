@@ -8,7 +8,8 @@ const promptToProps /* () => Promise */ = async function() {
   );
 
   // Parse cli arg options
-  const { options, args } = this;
+  const { args } = this;
+  const options = this.options.cliOptions || this.options;
   const num = options.num || options.n;
   const title = options.title || options.t || args[0];
 
