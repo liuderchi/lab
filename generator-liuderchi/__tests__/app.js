@@ -17,6 +17,7 @@ describe('generator-liuderchi:app', () => {
       '.gitignore',
       'package.json',
       'readme.md',
+      'sandbox.config.json',
       'solution.js',
       'solution.test.js',
     ];

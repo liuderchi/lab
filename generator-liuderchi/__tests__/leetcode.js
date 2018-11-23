@@ -22,6 +22,7 @@ describe('sub-generator liuderchi:leetcode', () => {
       '.gitignore',
       'package.json',
       'readme.md',
+      'sandbox.config.json',
       'solution.js',
       'solution.test.js',
     ];
