@@ -1,18 +1,26 @@
+import copy from 'rollup-plugin-copy';
+
 export default {
-  input: ["src/main-a.js", "src/main-b.js"],
+  input: ['src/main-a.js', 'src/main-b.js'],
   output: [
     // ES module version, for modern browsers
     {
-      dir: "public/module",
-      format: "es",
-      sourcemap: true
+      dir: 'public/module',
+      format: 'es',
+      sourcemap: true,
     },
     // SystemJS version, for older browsers
     {
-      dir: "public/nomodule",
-      format: "system",
-      sourcemap: true
-    }
+      dir: 'public/nomodule',
+      format: 'system',
+      sourcemap: true,
+    },
   ],
-  experimentalCodeSplitting: true
+  experimentalCodeSplitting: true,
+  plugins: [
+    copy({
+      'src/foo.css': 'public/foo.css',
+      verbose: true,
+    }),
+  ],
 };
