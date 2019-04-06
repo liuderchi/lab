@@ -1,0 +1,6 @@
+{
+  "hardReloadOnChange": false,
+  "infiniteLoopProtection": true,
+  "template": "parcel",
+  "view": "browser"
+}
