@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "id": "abcdefg",
+      "title": "learn postman",
+      "isDone": false,
+      "importance": 3
+    },
+    {
+      "id": "hijklmn",
+      "title": "try use json-server",
+      "isDone": true,
+      "importance": 1
+    }
+  ]
+}
