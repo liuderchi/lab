@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "30248467-3826-4e2e-b405-e045f630b474",
+		"name": "api-tdd-postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/todos",
+			"item": [
+				{
+					"name": "\b\b[1] Query Todo List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "839e184e-7856-4b0a-ab0e-51442e4c52e9",
+								"exec": [
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.environment.set('INITIAL_LIST_LENGTH', responseJson.length);",
+									"",
+									"    const todoListSchema = {",
+									"        // declaring itself a json schema",
+									"        $schema: 'todo schema',",
+									"        // id for json schema http://json-schema.org/understanding-json-schema/basics.html#declaring-a-json-schema",
+									"        $id: 'todo-list-schema',  ",
+									"        type: 'array',",
+									"        items: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                id: { ",
+									"                    type: 'string', ",
+									"                    minLength: 7,",
+									"                },",
+									"                title: { type: 'string' },",
+									"                isDone: { type: 'boolean'},",
+									"                importance: { ",
+									"                    type: 'number',",
+									"                    minimum: 1,",
+									"                    maximum: 10,",
+									"                },",
+									"            },",
+									"            required: [",
+									"                'id', ",
+									"                'title', ",
+									"                // 'isDone',",
+									"                // 'importance',",
+									"            ]",
+									"        }",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoListSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos?_sort=importance&_order=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "_sort",
+									"value": "importance"
+								},
+								{
+									"key": "_order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[2] Create a Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "349af91c-aa37-460a-8015-ef3c317e1585",
+								"exec": [
+									"pm.test('respnose is 201', () => {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"    ",
+									"    pm.environment.set('TODO_ID', responseJson.id);",
+									"",
+									"    const todoSchema = {",
+									"        $schema: 'todo schema',",
+									"        $id: 'todo-schema',  ",
+									"        type: 'object',",
+									"        properties: {",
+									"            id: { ",
+									"                type: 'string', ",
+									"                minLength: 7,",
+									"            },",
+									"            title: { type: 'string' },",
+									"            isDone: { type: 'boolean'},",
+									"            importance: { ",
+									"                type: 'number',",
+									"                minimum: 1,",
+									"                maximum: 10,",
+									"            },",
+									"        },",
+									"        required: [",
+									"            'id', ",
+									"            'title', ",
+									"            // 'isDone',",
+									"            // 'importance',",
+									"        ]",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"TESTING: a mock title\",\n\t\"isDone\": false,\n\t\"importance\": 5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[3] Query created Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de5fd34b-865a-4639-b290-1fe8976031a5",
+								"exec": [
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    const todoSchema = {",
+									"        $schema: 'todo schema',",
+									"        $id: 'todo-schema',  ",
+									"        type: 'object',",
+									"        properties: {",
+									"            id: { ",
+									"                type: 'string', ",
+									"                minLength: 7,",
+									"            },",
+									"            title: { type: 'string' },",
+									"            isDone: { type: 'boolean'},",
+									"            importance: { ",
+									"                type: 'number',",
+									"                minimum: 1,",
+									"                maximum: 10,",
+									"            },",
+									"        },",
+									"        required: [",
+									"            'id', ",
+									"            'title', ",
+									"            // 'isDone',",
+									"            // 'importance',",
+									"        ]",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});",
+									"",
+									"pm.test('response todo has correct field value', () => {",
+									"    const responseJson = pm.response.json();",
+									"    ",
+									"    const { id, title, isDone, importance } = responseJson;",
+									"    pm.expect(id).to.equal(pm.environment.get('TODO_ID'));",
+									"    pm.expect(title).to.equal('TESTING: a mock title');",
+									"    pm.expect(isDone).to.equal(false);",
+									"    pm.expect(importance).to.equal(5);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"have lunch\",\n\t\"isDone\": false,\n\t\"importance\": 3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos/{{TODO_ID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos",
+								"{{TODO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[4] Update a Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfda146c-908f-40ea-aff4-cd91132393c7",
+								"exec": [
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    const todoSchema = {",
+									"        $schema: 'todo schema',",
+									"        $id: 'todo-schema',  ",
+									"        type: 'object',",
+									"        properties: {",
+									"            id: { ",
+									"                type: 'string', ",
+									"                minLength: 7,",
+									"            },",
+									"            title: { type: 'string' },",
+									"            isDone: { type: 'boolean'},",
+									"            importance: { ",
+									"                type: 'number',",
+									"                minimum: 1,",
+									"                maximum: 10,",
+									"            },",
+									"        },",
+									"        required: [",
+									"            'id', ",
+									"            'title', ",
+									"            // 'isDone',",
+									"            // 'importance',",
+									"        ]",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"having dinner\",\n\t\"isDone\": true,\n\t\"importance\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos/{{TODO_ID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos",
+								"{{TODO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[5] Query created Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de5fd34b-865a-4639-b290-1fe8976031a5",
+								"exec": [
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"",
+									"    const todoSchema = {",
+									"        $schema: 'todo schema',",
+									"        $id: 'todo-schema',  ",
+									"        type: 'object',",
+									"        properties: {",
+									"            id: { ",
+									"                type: 'string', ",
+									"                minLength: 7,",
+									"            },",
+									"            title: { type: 'string' },",
+									"            isDone: { type: 'boolean'},",
+									"            importance: { ",
+									"                type: 'number',",
+									"                minimum: 1,",
+									"                maximum: 10,",
+									"            },",
+									"        },",
+									"        required: [",
+									"            'id', ",
+									"            'title', ",
+									"            // 'isDone',",
+									"            // 'importance',",
+									"        ]",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});",
+									"",
+									"pm.test('response todo has correct field value', () => {",
+									"    const responseJson = pm.response.json();",
+									"    ",
+									"    const { id, title, isDone, importance } = responseJson;",
+									"    pm.expect(id).to.equal(pm.environment.get('TODO_ID'));",
+									"    pm.expect(title).to.equal('having dinner');",
+									"    pm.expect(isDone).to.equal(true);",
+									"    pm.expect(importance).to.equal(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"having lunch\",\n\t\"isDone\": true,\n\t\"importance\": 3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos/{{TODO_ID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos",
+								"{{TODO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[6] Delete a Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c9ddbbde-8ff0-4829-8e04-995965fd3d3e",
+								"exec": [
+									"pm.environment.unset('TODO_ID');",
+									"",
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body is empty', () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos/{{TODO_ID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos",
+								"{{TODO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[7] Query deleted Todo shold fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "801e9ffd-7d32-4b56-99a5-50ff9481c710",
+								"exec": [
+									"pm.test('respnose is 404', () => {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"have lunch\",\n\t\"isDone\": false,\n\t\"importance\": 3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos/{{TODO_ID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos",
+								"{{TODO_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "\b\b[8] Query Todo List Again",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "839e184e-7856-4b0a-ab0e-51442e4c52e9",
+								"exec": [
+									"pm.test('respnose is ok', () => {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('content-Type is present in header', () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test('response body has valid todo schema', () => {",
+									"    const responseJson = pm.response.json();",
+									"    const todoListSchema = {",
+									"        // declaring itself a json schema",
+									"        $schema: 'todo schema',",
+									"        // id for json schema http://json-schema.org/understanding-json-schema/basics.html#declaring-a-json-schema",
+									"        $id: 'todo-list-schema',  ",
+									"        type: 'array',",
+									"        items: {",
+									"            type: 'object',",
+									"            properties: {",
+									"                id: { ",
+									"                    type: 'string', ",
+									"                    minLength: 7,",
+									"                },",
+									"                title: { type: 'string' },",
+									"                isDone: { type: 'boolean'},",
+									"                importance: { ",
+									"                    type: 'number',",
+									"                    minimum: 1,",
+									"                    maximum: 10,",
+									"                },",
+									"            },",
+									"            required: [",
+									"                'id', ",
+									"                'title', ",
+									"                // 'isDone',",
+									"                // 'importance',",
+									"            ]",
+									"        }",
+									"    }",
+									"    pm.expect(",
+									"        tv4.validate(responseJson, todoListSchema),",
+									"        `____${tv4.error}____`,",
+									"    ).to.be.true;",
+									"});",
+									"",
+									"pm.test('response todo list should be same as initial', () => {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.length).to.equal(pm.environment.get('INITIAL_LIST_LENGTH'))",
+									"    pm.environment.unset('INITIAL_LIST_LENGTH');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/todos?_sort=importance&_order=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"todos"
+							],
+							"query": [
+								{
+									"key": "_sort",
+									"value": "importance"
+								},
+								{
+									"key": "_order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "testing with json-server with following `db.json`\n\n```json\n{\n  \"todos\": [\n    {\n      \"id\": \"abcdefg\",\n      \"title\": \"learn postman\",\n      \"isDone\": false,\n      \"importance\": 3\n    },\n    {\n      \"id\": \"hijklmn\",\n      \"title\": \"try use json-server\",\n      \"isDone\": true,\n      \"importance\": 1\n    }\n  ]\n}\n```",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cf0979c7-aba0-449c-8ad3-58d3f9b447ee",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d7f9a555-b1ee-4034-80ea-0238e454ea80",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('[Common] response type is json', () => {",
+							"    pm.response.to.be.json;",
+							"});",
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
