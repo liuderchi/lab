@@ -19,4 +19,4 @@ slide:
     theme: default
 extends:
   js:
-  css:
+  css: style.css
