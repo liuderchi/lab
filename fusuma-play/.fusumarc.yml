@@ -7,7 +7,7 @@ meta:
   sns:
     - twitter
 slide:
-  loop: true
+  loop: false
   sidebar: true
   targetBlank: true
   showIndex: false

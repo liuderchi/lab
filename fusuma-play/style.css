@@ -1,5 +1,27 @@
 /* ref: https://github.com/hiroppy/fusuma/blob/master/samples/intro/style.css */
 
 ol {
-    margin: 0 auto;
+  margin: 0 auto;
+  padding-top: 0.5rem;
+}
+
+ul {
+  padding-top: 0.5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding-bottom: 1rem;
+}
+
+ul > * + *, ol > * + * {
+  padding-top: 0.5rem;
+}
+
+input[type=checkbox] {
+  transform: translateY(-0.5rem) scale(1.5);
 }
