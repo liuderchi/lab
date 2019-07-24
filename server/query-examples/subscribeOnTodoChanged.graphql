@@ -1,0 +1,10 @@
+subscription onTodoChanged {
+  todoChanged {
+    name
+    payload {
+      id
+      title
+      done
+    }
+  }
+}

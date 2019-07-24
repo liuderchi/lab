@@ -1,0 +1,23 @@
+mutation myUpdateTodo(
+  $id: Int!,
+  $done: Boolean,
+  $title: String,
+) {
+  updateTodo(
+    id: $id
+    done: $done
+    title: $title
+  ) {
+    id
+    done
+    title
+  }
+}
+
+# query variables
+#
+# {
+#   "id": 5,
+#   "done": true,
+#   "title": "Add Apollo Server Subscription Example"
+# }

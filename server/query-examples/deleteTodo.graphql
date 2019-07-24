@@ -1,0 +1,13 @@
+mutation myDeleteTodo($id: Int!) {
+  deleteTodo(id: $id) {
+    id
+    title
+    done
+  }
+}
+
+# query variables
+#
+# {
+#   "id": 3
+# }

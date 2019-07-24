@@ -1,0 +1,13 @@
+mutation myAddTodo($title: String!) {
+  addTodo(title: $title) {
+    id
+    title
+  }
+}
+
+
+# query variables
+#
+# {
+#   "title": "Add Apollo CRUD queries"
+# }

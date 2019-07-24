@@ -1,0 +1,25 @@
+{
+  "name": "todo-app-server-with-apollo-server",
+  "description": "Minimal todo list app with  CRUD Pub/Sub support powered by Apollo Server v2\n\nhttps://www.apollographql.com/docs/apollo-server/v2/essentials/schema.html",
+  "dependencies": {
+    "apollo-server": "2.6.9",
+    "graphql": "14.4.2",
+    "seedrandom": "3.0.1"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js localhost 4000"
+  },
+  "keywords": [
+    "pub-sub",
+    "todo-app",
+    "apollo-server",
+    "apollo",
+    "graphql"
+  ],
+  "devDependencies": {
+    "@types/graphql": "14.0.1",
+    "nodemon": "1.18.4"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "todo-app-client-with-react-apollo",
+  "version": "1.0.0",
+  "description": "Minimal todo list app with Apollo Server v2\n\nhttps://www.apollographql.com/docs/react/essentials/get-started.html#creating-client",
+  "keywords": ["todo-app", "react-apollo", "apollo-boost", "apollo", "graphql"],
+  "main": "src/index.js",
+  "dependencies": {
+    "apollo-boost": "0.4.3",
+    "apollo-cache-inmemory": "1.6.2",
+    "apollo-client": "2.6.3",
+    "apollo-link": "1.2.12",
+    "apollo-link-error": "1.1.11",
+    "apollo-link-http": "1.5.15",
+    "apollo-link-ws": "1.0.18",
+    "graphql": "14.4.2",
+    "react": "16.8.6",
+    "react-apollo": "2.5.5",
+    "react-dom": "16.8.6",
+    "react-scripts": "3.0.1",
+    "subscriptions-transport-ws": "0.9.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

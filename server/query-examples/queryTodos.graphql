@@ -1,0 +1,8 @@
+query myQuery {
+  todos {
+    id
+    done
+    title
+  }
+  version
+}

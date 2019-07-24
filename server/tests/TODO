@@ -1,0 +1,9 @@
+1. create 3 items; expect length and subscription, info; save all ids
+2. delete item with specified index "K"; expect result and subscription
+3. delete item again with specified index "K"; expect -1
+4. update item with all props; expect result and subscription
+5. update another item with one prop only; expect result and subscription
+
+
+// thoughts:
+// . rest server unit test like jest?
