@@ -14,7 +14,7 @@ import './styles.css';
  * 1. init client
  */
 const CLIENT = new apolloClient({
-  uri: `http://${API_DOMAIN}/`,
+  uri: `https://${API_DOMAIN}/`,
 });
 // const CLIENT = apolloClientWithWS.create({
 //   apiURI: `http://${API_DOMAIN}/`,
