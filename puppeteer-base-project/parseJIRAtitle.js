@@ -1,13 +1,21 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const clipboardy = require('clipboardy');
 
-// input: chrome endpoint
-// ipnut: ticketNum
+if (process.argv.length < 3) {
+  console.error('Bad argv input!', process.argv);
+  process.exit(-2);
+}
+
+const ticketNum = process.argv[2];
 
 (async () => {
+  /**
+   * get chrome devtool protocol endpoint
+   * /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
+   */
+  // TODO dot env
   const wsChromeEndpointUrl =
-    'ws://127.0.0.1:9222/devtools/browser/4231b9b2-82f1-4154-9f54-30f39387f436';
+    'ws://127.0.0.1:9222/devtools/browser/e9a2e7b9-17a6-49df-94df-f11b6b32b931';
   const browser = await puppeteer.connect({
     browserWSEndpoint: wsChromeEndpointUrl,
   });
@@ -16,7 +24,8 @@ const clipboardy = require('clipboardy');
   // });
 
   const page = await browser.newPage();
-  const pageUrl = 'https://jira.vzbuilders.com/browse/ECSEARCH-18644';
+  // TODO url prefix as dot env
+  const pageUrl = `https://jira.vzbuilders.com/browse/ECSEARCH-${ticketNum}`;
   await page.goto(pageUrl, {
     waitUntil: 'networkidle0', // 'networkidle0' is very useful for SPAs.
   });
@@ -32,6 +41,7 @@ const clipboardy = require('clipboardy');
   if (title) {
     clipboardy.writeSync(title);
     console.log('✅  Title is copied to clipboard');
+    console.log(`  ${title}`);
     // TODO if browser has more than one tab, close this page
     process.exit();
   } else {
