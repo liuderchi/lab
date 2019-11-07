@@ -15,7 +15,7 @@ const ticketNum = process.argv[2];
    */
   // TODO dot env
   const wsChromeEndpointUrl =
-    'ws://127.0.0.1:9222/devtools/browser/e9a2e7b9-17a6-49df-94df-f11b6b32b931';
+    'ws://127.0.0.1:9222/devtools/browser/fdd4144e-2bd5-4b71-8ee5-4a302aa53421';
   const browser = await puppeteer.connect({
     browserWSEndpoint: wsChromeEndpointUrl,
   });
@@ -23,6 +23,7 @@ const ticketNum = process.argv[2];
   //     headless: false // Puppeteer is 'headless' by default.
   // });
 
+  // TODO do not focus app window
   const page = await browser.newPage();
   // TODO url prefix as dot env
   const pageUrl = `https://jira.vzbuilders.com/browse/ECSEARCH-${ticketNum}`;
@@ -39,8 +40,10 @@ const ticketNum = process.argv[2];
   });
 
   if (title) {
-    clipboardy.writeSync(title);
-    console.log('✅  Title is copied to clipboard');
+    clipboardy.writeSync(
+      `[${title} - ECSEARCH-${ticketNum}](https://jira.vzbuilders.com/browse/ECSEARCH-${ticketNum})`,
+    );
+    console.log('✅  Title Markdown is copied to clipboard');
     console.log(`  ${title}`);
     // TODO if browser has more than one tab, close this page
     process.exit();
