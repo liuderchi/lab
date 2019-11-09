@@ -11,6 +11,6 @@
 
 ## Create Custom Command
 
-- new script js
+- add `myJob.js`
 - (optional) new npm script
-- new command to `commands.sh`
+- add command to `commands.sh`

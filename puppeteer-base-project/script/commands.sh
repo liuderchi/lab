@@ -15,3 +15,6 @@ parseJiraTitle() {
       npm rum parse-jira-title -- $1
   )
 }
+himail() {
+  (cd $PPT_PROJ_ROOT && node script/himail.js)
+}
