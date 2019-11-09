@@ -3,7 +3,7 @@
     "description": "Puppeteer Base Project",
     "version": "1.0.0",
     "scripts": {
-        "parse-jira-title": "node parseJIRAtitle.js"
+        "parse-jira-title": "node script/parseJiraTitle.js"
     },
     "engines": {
         "node": ">=12"
