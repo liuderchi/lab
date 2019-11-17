@@ -5,7 +5,6 @@ import { parse } from 'node-html-parser';
 import './styles.css';
 import useInterval from './useInterval';
 import notify from './notify';
-import db from './db.json';
 
 const URL =
   'https://rent.591.com.tw/?kind=1&region=1&section=3,5,7,4&rentprice=10000,40000&patternMore=3&area=20,60&hasimg=1&not_cover=1&order=posttime&orderType=desc';
@@ -20,7 +19,11 @@ const crawlerFetch = url => {
         const price = el.childNodes[5].text.replace(/\s+/g, '');
         const link = `https:${el.childNodes[3].childNodes[1].childNodes[1].attributes.href}`;
         const id = /\d{7}/g.exec(link)[0];
-        return { id, title, price, link };
+        const updateAt = (el.childNodes[3].childNodes[7].childNodes[3] || {})[
+          'text'
+        ];
+        console.log({ updateAt });
+        return { id, title, price, link, updateAt };
       });
       return resultList;
     })
@@ -57,6 +60,7 @@ const App = () => {
           id: rent.id,
           title: rent.title,
           price: rent.price,
+          updateAt: rent.updateAt,
           link: rent.link,
         };
         if (!bucket[rent.id]) newRentCount++;
@@ -74,7 +78,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>⚠️ NEVER LOGIN ANY SITE IN THIS BROWSER!</h1>
+      <h3>⚠️ NEVER LOGIN ANY SITE IN THIS BROWSER!</h3>
       {window.Notification && Notification.permission !== 'granted' && (
         <button
           onClick={() => notify('✅ You haved enabled browser notification')}
@@ -90,6 +94,9 @@ const App = () => {
           value={targetUrl}
           onChange={e => setTargetUrl(e.target.value)}
         />
+        <a href={targetUrl} target="_blank" rel="noopener noreferrer">
+          {`🔗`}
+        </a>
       </div>
       <div>
         {`Every `}
@@ -105,8 +112,9 @@ const App = () => {
         {` Seconds`}
       </div>
       <br />
+      <div>last update: {lastUpdate.toLocaleString()}</div>
+      <br />
       <button onClick={() => tick()}>{`⬇️  fetch now`}</button>
-      <span> last update: {lastUpdate.toLocaleString()}</span>
       <ul>
         {Object.keys(bucket)
           .sort((a, b) => b - a)
@@ -114,9 +122,11 @@ const App = () => {
           .map(rent => {
             return (
               <li key={rent.id}>
-                {`#${rent.id} ${rent.title}, ${rent.price}`}
+                <span className="title">{`${rent.title} `}</span>
+                <span className="price">{`💰 ${rent.price} `}</span>
+                <span className="updateAt">{`⏱ ${rent.updateAt} `}</span>
                 <a href={rent.link} target="_blank" rel="noopener noreferrer">
-                  link
+                  {`🔗 #${rent.id}`}
                 </a>
               </li>
             );
