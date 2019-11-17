@@ -1,0 +1,9 @@
+.App {
+  font-family: sans-serif;
+  /* text-align: center; */
+}
+
+textarea {
+  height: 50px;
+  width: 400px;
+}
