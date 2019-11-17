@@ -4,6 +4,27 @@
 }
 
 textarea {
-  height: 50px;
+  font-size: 14px;
+  height: 100px;
   width: 400px;
+  min-width: 400px;
+}
+
+ul {
+  list-style-type: none;
+}
+ul > li {
+  height: 60px;
+}
+ul > li > span.title {
+  font-size: 16px;
+}
+ul > li > span.price {
+  font-size: 14px;
+}
+ul > li > span.updateAt {
+  font-size: 14px;
+}
+ul > li > a {
+  font-size: 12px;
 }
