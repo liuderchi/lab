@@ -1,6 +1,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/notification
 // Browser notify cation
 
+// TODO: make it hook
 export const notify = message => {
   // https://developer.mozilla.org/en-US/docs/Web/API/notification
 
