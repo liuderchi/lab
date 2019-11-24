@@ -1,0 +1,25 @@
+{
+  "name": "my-react-app-template",
+  "version": "1.0.0",
+  "description": "gh repo ready sandbox for react app",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.3.0-next.62"
+  },
+  "devDependencies": {
+    "eslint": "6.7.0",
+    "typescript": "3.3.3"
+  },
+  "files": [".eslintrc.js"],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "eslint": "eslint ./"
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+}
