@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const clipboardy = require('clipboardy');
 
-require('dotenv').config();
+require('dotenv-safe').config();
 
 // check .env
 const { CHROME_ENDPOINT, JIRA_URL_PREFIX } = process.env;
@@ -24,6 +24,7 @@ const main = async () => {
    * /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
    */
   const browser = await puppeteer.connect({
+    defaultViewport: null,
     browserWSEndpoint: CHROME_ENDPOINT,
   });
   // const browser = await puppeteer.launch({

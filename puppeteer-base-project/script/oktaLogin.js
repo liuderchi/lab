@@ -1,24 +1,11 @@
-require('dotenv').config();
+require('dotenv-safe').config();
 const puppeteer = require('puppeteer');
 const inquirer = require('inquirer');
 
+const { CHROME_ENDPOINT, OKTA_LOGIN_URL, OKTA_HOME_URL, OKTA_ACCOUNT, } = process.env;
 const IFRAME_READY_TIME = 5000;
-const OKTA_HOME_URL = 'https://oath.okta.com/app/UserHome';
 const BUTTON_Y = 130.5;
 const BUTTON_HEIGHT = 38;
-const { CHROME_ENDPOINT, OKTA_LOGIN_URL, OKTA_ACCOUNT, } = process.env;
-
-// env checks
-if (!CHROME_ENDPOINT || !OKTA_LOGIN_URL || !OKTA_ACCOUNT) {
-  console.error(
-    'Bad .env config, please check all required values in .env.example',
-  );
-  process.exit(-3);
-}
-if (process.argv.length < 2) {
-  console.error('Bad argv input!', process.argv);
-  process.exit(-2);
-}
 
 const main = async () => {
   const { password = '' } = await inquirer.prompt([
@@ -32,6 +19,7 @@ const main = async () => {
   ])
 
   const browser = await puppeteer.connect({
+    defaultViewport: null,
     browserWSEndpoint: CHROME_ENDPOINT,
   });
   const page = await browser.newPage();
@@ -39,6 +27,7 @@ const main = async () => {
   await page.goto(OKTA_LOGIN_URL, { waitUntil: 'networkidle0' }); // 'networkidle0' is very useful for SPAs.
   if (page.url() === OKTA_HOME_URL) {
     console.log('✅  You have already logged in');
+    page.close();
     process.exit();
   }
 
@@ -116,13 +105,14 @@ const main = async () => {
     console.log('🔔  Push Notification Sent; Waiting for Your Approval...');
     await page.waitForNavigation();
     if (page.url() !== OKTA_HOME_URL) {
-      throw Error('url is not correct push notification might timeout');
+      throw Error('url is not correct; push notification might timeout');
     }
   } catch (error) {
     console.log('⚠️  Login Failed', error);
     process.exit(-1);
   }
   console.log('✅  Login Success');
+  page.close();
   process.exit();
 };
 

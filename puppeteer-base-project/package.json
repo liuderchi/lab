@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "clipboardy": "^2.1.0",
-        "dotenv": "^8.2.0",
+        "dotenv-safe": "^8.2.0",
         "inquirer": "^7.0.0",
         "puppeteer": "^1.4.0"
     }

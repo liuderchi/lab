@@ -1,42 +1,34 @@
+require('dotenv-safe').config({
+  example: './himail.env.example',
+});
 const puppeteer = require('puppeteer');
+const inquirer = require('inquirer');
 
-require('dotenv').config();
-
-// check .env
 const {
   CHROME_ENDPOINT,
   HIMAIL_URL,
   HIMAIL_ACCOUNT,
-  HIMAIL_PWD,
   HIMAIL_INBOX_URL,
 } = process.env;
-if (
-  !CHROME_ENDPOINT ||
-  !HIMAIL_URL ||
-  !HIMAIL_ACCOUNT ||
-  !HIMAIL_PWD ||
-  !HIMAIL_INBOX_URL
-) {
-  console.error('Bad .env config, please check all required values');
-  process.exit(-3);
-}
-
-// check cli args
-if (process.argv.length < 2) {
-  console.error('Bad argv input!', process.argv);
-  process.exit(-2);
-}
 
 const main = async () => {
+  const { password = '' } = await inquirer.prompt([
+    {
+      type: 'password',
+      message: 'Enter himail Password:',
+      name: 'password',
+      mask: '*',
+      validate: value => !!value || 'Password is required',
+    },
+  ]);
+
   const browser = await puppeteer.connect({
+    defaultViewport: null,
     browserWSEndpoint: CHROME_ENDPOINT,
   });
 
   const page = await browser.newPage();
-  const pageUrl = `${HIMAIL_URL}`;
-  await page.goto(pageUrl, {
-    waitUntil: 'networkidle0', // 'networkidle0' is very useful for SPAs.
-  });
+  await page.goto(HIMAIL_URL, { waitUntil: 'networkidle0' });
 
   try {
     await page.evaluate(
@@ -58,7 +50,7 @@ const main = async () => {
         }
       },
       HIMAIL_ACCOUNT,
-      HIMAIL_PWD,
+      password,
     );
 
     // wait for inbox link dom
