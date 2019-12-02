@@ -1,20 +1,17 @@
 PPT_PROJ_ROOT="$HOME/lab/puppeteer-base-project"
-startNewChromeWindow() {
-  # local appPath='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-  # local appPath='/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-  local appPath='/Applications/Chromium.app/Contents/MacOS/Chromium'
-  $appPath \
+chromePath='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+chromeCanaryPath='/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
+chromiumPath='/Applications/Chromium.app/Contents/MacOS/Chromium'
+
+startChromiumWithNewSession() {
+  $chromiumPath \
     --remote-debugging-port=9222 \
     --no-first-run \
     --no-default-browser-check \
     --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')
 }
-startChromeWithRemoteDubuggingPort() {
-  # local appPath='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-  # local appPath='/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-  local appPath='/Applications/Chromium.app/Contents/MacOS/Chromium'
-  $appPath \
-    --remote-debugging-port=9222
+startChromeWithRemoteDubugging() {
+  $chromePath --remote-debugging-port=9222
 }
 oktaLogin() {
   (cd $PPT_PROJ_ROOT && node script/oktaLogin.js)
