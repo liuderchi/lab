@@ -1,14 +1,15 @@
 require('dotenv').config();
 const puppeteer = require('puppeteer');
+const inquirer = require('inquirer');
 
 const IFRAME_READY_TIME = 5000;
 const OKTA_HOME_URL = 'https://oath.okta.com/app/UserHome';
 const BUTTON_Y = 130.5;
 const BUTTON_HEIGHT = 38;
-const { CHROME_ENDPOINT, OKTA_LOGIN_URL, OKTA_ACCOUNT, OKTA_PSD } = process.env;
+const { CHROME_ENDPOINT, OKTA_LOGIN_URL, OKTA_ACCOUNT, } = process.env;
 
 // env checks
-if (!CHROME_ENDPOINT || !OKTA_LOGIN_URL || !OKTA_ACCOUNT || !OKTA_PSD) {
+if (!CHROME_ENDPOINT || !OKTA_LOGIN_URL || !OKTA_ACCOUNT) {
   console.error(
     'Bad .env config, please check all required values in .env.example',
   );
@@ -20,6 +21,16 @@ if (process.argv.length < 2) {
 }
 
 const main = async () => {
+  const { password = '' } = await inquirer.prompt([
+    {
+      type: 'password',
+      message: 'Enter Your OKTA Password:',
+      name: 'password',
+      mask: '*',
+      validate: value => !!value || 'Password is required'
+    }
+  ])
+
   const browser = await puppeteer.connect({
     browserWSEndpoint: CHROME_ENDPOINT,
   });
@@ -30,7 +41,6 @@ const main = async () => {
     console.log('✅  You have already logged in');
     process.exit();
   }
-  // TODO cli prompt for password
 
   try {
     // account input
@@ -58,7 +68,7 @@ const main = async () => {
         throw Error('input password failed');
       }
     });
-    await page.keyboard.type(OKTA_PSD);
+    await page.keyboard.type(password);
 
     // submit button
     await page.evaluate(() => {
@@ -72,9 +82,9 @@ const main = async () => {
         throw Error('input password failed');
       }
     });
-
     console.log('Logging in...')
-    // wait for login button
+
+    // wait for push notification button
     await page.waitForNavigation({ timeout: 10000, waitUntil: 'networkidle0' });
     if (page.url() !== 'https://oath.okta.com/signin/verify/duo/web') {
       throw Error('url is not correct');
