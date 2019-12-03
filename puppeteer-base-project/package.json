@@ -2,6 +2,11 @@
     "name": "puppeteer-base-project",
     "description": "Puppeteer Base Project",
     "version": "1.0.0",
+    "bin": {
+        "himail": "./script/himail.js",
+        "parseJiraTitle": "./script/parseJiraTitle.js",
+        "oktalogin": "./script/oktaLogin.js"
+    },
     "scripts": {
         "parse-jira-title": "node script/parseJiraTitle.js"
     },

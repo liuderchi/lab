@@ -1,18 +1,13 @@
+#!/usr/bin/env node
+
 const puppeteer = require('puppeteer');
 const clipboardy = require('clipboardy');
 
 require('dotenv-safe').config();
 
-// check .env
-const { CHROME_ENDPOINT, JIRA_URL_PREFIX } = process.env;
-if (!CHROME_ENDPOINT || !JIRA_URL_PREFIX) {
-  console.error('Bad .env config, please check all required values');
-  process.exit(-3);
-}
-
 // check cli args
 if (process.argv.length < 3) {
-  console.error('Bad argv input!', process.argv);
+  console.error('Bad argv input! Should provide ticket number as args[1]', process.argv);
   process.exit(-2);
 }
 // TODO support multiple nubers

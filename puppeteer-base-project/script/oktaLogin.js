@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 require('dotenv-safe').config();
 const puppeteer = require('puppeteer');
 const inquirer = require('inquirer');

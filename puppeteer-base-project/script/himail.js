@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 require('dotenv-safe').config({
   example: './himail.env.example',
 });
