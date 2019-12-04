@@ -12,6 +12,7 @@ if (process.argv.length < 3) {
 }
 // TODO support multiple nubers
 const ticketNum = process.argv[2];
+const { CHROME_ENDPOINT, JIRA_URL_PREFIX } = process.env;
 
 const main = async () => {
   /**
