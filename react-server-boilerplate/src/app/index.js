@@ -1,17 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class App extends Component {
-  render() {
-    const { isMobile } = this.props;
-
-    return (
-      <div>
-        <h1>hello world {isMobile ? 'mobile' : 'desktop'}</h1>
-      </div>
-    );
-  }
-}
+const App = ({ isMobile }) => {
+  return (
+    <div>
+      <h1>hello world {isMobile ? 'mobile' : 'desktop'}</h1>
+    </div>
+  );
+};
 
 App.propTypes = {
-  isMobile: PropTypes.bool.isRequired
+  isMobile: PropTypes.bool.isRequired,
 };
+
+export default App;

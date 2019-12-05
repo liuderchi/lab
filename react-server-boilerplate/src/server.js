@@ -9,9 +9,11 @@ const server = express();
 server.use('/assets', express.static('assets'));
 
 server.get('/', (req, res) => {
-  const isMobile = true;
+  const isMobile = !!req.query.isMobile;
   const initialState = { isMobile };
   const appString = renderToString(<App {...initialState} />);
+
+  // const appString = renderToString(<App />);
 
   res.send(template({
     body: appString,
