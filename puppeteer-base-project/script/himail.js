@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-require('dotenv-safe').config({
-  example: './himail.env.example',
-});
+const path = require('path');
 const puppeteer = require('puppeteer');
 const inquirer = require('inquirer');
+
+require('dotenv-safe').config({
+  path: path.join(__dirname, '..', '.env'),
+  example: path.join(__dirname, '../env', 'himail.env.example'),
+});
 
 const {
   CHROME_ENDPOINT,

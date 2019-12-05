@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
+const path = require('path');
 const puppeteer = require('puppeteer');
 const clipboardy = require('clipboardy');
 
-require('dotenv-safe').config();
+require('dotenv-safe').config({
+  path: path.join(__dirname, '..', '.env'),
+  example: path.join(__dirname, '../env', '.env.example'),
+});
 
 // check cli args
 if (process.argv.length < 3) {

@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
-require('dotenv-safe').config();
+const path = require('path');
 const puppeteer = require('puppeteer');
 const inquirer = require('inquirer');
+
+require('dotenv-safe').config({
+  path: path.join(__dirname, '..', '.env'),
+  example: path.join(__dirname, '../env', '.env.example'),
+});
 
 const { CHROME_ENDPOINT, OKTA_LOGIN_URL, OKTA_HOME_URL, OKTA_ACCOUNT, } = process.env;
 const IFRAME_READY_TIME = 5000;
