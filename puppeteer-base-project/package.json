@@ -5,7 +5,8 @@
     "bin": {
         "himail": "./script/himail.js",
         "parseJiraTitle": "./script/parseJiraTitle.js",
-        "oktalogin": "./script/oktaLogin.js"
+        "oktalogin": "./script/oktaLogin.js",
+        "keepPrAlive": "./script/keepPrAlive.js"
     },
     "scripts": {
         "parse-jira-title": "node script/parseJiraTitle.js"
