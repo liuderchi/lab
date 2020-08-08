@@ -34,7 +34,8 @@ const main = async () => {
   const page = await browser.newPage();
   const pageUrl = `${JIRA_URL_PREFIX}${ticketNum}`;
   await page.goto(pageUrl, {
-    waitUntil: 'networkidle0', // 'networkidle0' is very useful for SPAs.
+    waitFor: 3000,
+    // waitUntil: 'networkidle0', // 'networkidle0' is very useful for SPAs.
   });
 
   const title = await page.evaluate(() => {

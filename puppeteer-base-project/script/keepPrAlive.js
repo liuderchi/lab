@@ -34,11 +34,20 @@ const main = async () => {
 
     // check button wording
     const message = await page.evaluate(() => {
+      const formatDate = (d) =>
+        `${d.getFullYear()}-${
+          d.getMonth() + 1
+        }-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+
       const buttonDom = document.querySelector('.call-to-action button');
       if (buttonDom && (buttonDom.textContent || '').trim() === 'Stop') {
-        return Promise.resolve('✅ PR build is running...');
+        return Promise.resolve(
+          `${formatDate(new Date())} ✅ PR build is running...`,
+        );
       } else {
-        return Promise.resolve('⚠️ PR build is not running...');
+        return Promise.resolve(
+          `${formatDate(new Date())}  ⚠️ PR build is not running...`,
+        );
       }
     });
     console.log(message);
