@@ -29,7 +29,7 @@
     "_build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start": "start-storybook -p 8080 -s public",
+    "start": "start-storybook -p 8080",
     "build": "build-storybook -s public"
   },
   "browserslist": [
