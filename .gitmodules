@@ -1,3 +1,6 @@
 [submodule "turborepo-fork"]
 	path = turborepo-fork
 	url = git@github.com:liuderchi/turborepo.git
+[submodule "packages/kcd-scripts"]
+	path = packages/kcd-scripts
+	url = git@github.com:liuderchi/kcd-scripts.git
