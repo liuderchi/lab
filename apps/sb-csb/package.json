@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "npm run start",
     "start": "start-storybook -p 8080",
     "cra-start": "react-scripts start",
     "build": "react-scripts build",
