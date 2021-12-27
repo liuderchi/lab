@@ -3,11 +3,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { normalize } from 'polished'
 
 import viewports from './viewports'
-import {
-  globalCSS,
-  inTheKnowTheme,
-  marketplaceTheme,
-} from '../src/utils/theme'
+import { globalCSS, inTheKnowTheme, marketplaceTheme } from '../src/utils/theme'
 
 const THEME_ITK = 'Theme: In The Know'
 const THEME_MARKETPLACE = 'Theme: Marketplace'
@@ -22,7 +18,7 @@ const themeOptions = [
     value: THEME_ITK,
     title: THEME_ITK,
     theme: inTheKnowTheme,
-  }
+  },
 ]
 
 export const globalTypes = {
