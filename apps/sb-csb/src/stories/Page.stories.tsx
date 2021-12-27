@@ -16,8 +16,10 @@ LoggedIn.args = {
   // More on composing args: https://storybook.js.org/docs/react/writing-stories/args#args-composition
   ...HeaderStories.LoggedIn.args,
 }
+LoggedIn.storyName = 'Logged In'
 
 export const LoggedOut = Template.bind({})
 LoggedOut.args = {
   ...HeaderStories.LoggedOut.args,
 }
+LoggedOut.storyName = 'Logged Out'

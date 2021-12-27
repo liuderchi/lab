@@ -22,20 +22,26 @@ Primary.args = {
   primary: true,
   label: 'Button',
 }
+// TODO try sb code splitting feature, require static story name
+// https://storybook.js.org/blog/storybook-on-demand-architecture/ > "Caveats"
+Primary.storyName = 'Primary'
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   label: 'Button',
 }
+Secondary.storyName = 'Secondary'
 
 export const Large = Template.bind({})
 Large.args = {
   size: 'large',
   label: 'Button',
 }
+Large.storyName = 'Large'
 
 export const Small = Template.bind({})
 Small.args = {
   size: 'small',
   label: 'Button',
 }
+Small.storyName = 'Small'

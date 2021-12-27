@@ -14,4 +14,7 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  features: {
+    storyStoreV7: true, // code spitting https://storybook.js.org/blog/storybook-on-demand-architecture/
+  },
 }

@@ -14,6 +14,8 @@ export const LoggedIn = Template.bind({})
 LoggedIn.args = {
   user: {},
 }
+LoggedIn.storyName = 'Logged In'
 
 export const LoggedOut = Template.bind({})
 LoggedOut.args = {}
+LoggedOut.storyName = 'Logged Out'
