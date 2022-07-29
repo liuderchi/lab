@@ -4,3 +4,4 @@ node_modules
 
 # google api credentials
 *.json
+.env

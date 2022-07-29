@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/liuderchi/lab#readme",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "google-spreadsheet": "^3.3.0"
   }
 }
